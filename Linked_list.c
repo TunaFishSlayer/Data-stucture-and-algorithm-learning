@@ -40,6 +40,21 @@ void Print_List(struct Node* head){
     printf("NULL\n");
 }
 
+//Delete a node
+void Pop_node(struct Node** index)
+{
+    // underflow condition
+    if (*index == NULL) {
+        printf("Node not exist");
+    }
+    struct Node* head = *index;
+    int result = head->data;        // pull out data before the node is deleted
+    (*index) = (*index)->next;      // unlink the head node for the caller
+    free(head);                     // free the head node
+    printf("Poped node is : %d\n",result);           
+}
+ 
+
 int main(){
     int n,i,integer;
     struct Node* index = NULL;
@@ -49,7 +64,8 @@ int main(){
         Push_Node(&index,integer);
     }
     scanf("%d",&integer);
-    Append_Node(index,integer);    
+    Append_Node(index,integer); 
+    Pop_node(&index);   
     Print_List(index);
 }
 
