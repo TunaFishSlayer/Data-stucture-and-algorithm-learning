@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 //Linked list node
  struct Node {
@@ -30,17 +31,18 @@ void Append_Node(struct Node* head, int n){
     current -> next = newNode;
 }
 
-//Print the whole list from a chosen node
-void Print_List(struct Node* head){
+// Search for a node
+bool Search(struct Node* head, int x){
     struct Node* current = head;
     while (current != NULL) {
-        printf("%d -> ", current->data);
+        if (current -> data == x)
+            return true ;
         current = current->next;
     }
-    printf("NULL\n");
+    return false;
 }
 
-//Delete a node
+//Pop a node
 void Pop_node(struct Node** index)
 {
     // underflow condition
@@ -53,20 +55,30 @@ void Pop_node(struct Node** index)
     free(head);                     // free the head node
     printf("Poped node is : %d\n",result);           
 }
- 
+
+//Print the whole list from a chosen node
+void Print_List(struct Node* head){
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
 
 int main(){
     int n,i,integer;
     struct Node* index = NULL;
     scanf("%d",&n);
-    for (i=0;i<n-1;i++){
+    for (i=0;i<n;i++){
         scanf("%d",&integer);
         Push_Node(&index,integer);
     }
-    scanf("%d",&integer);
-    Append_Node(index,integer); 
-    Pop_node(&index);   
+    //Pop_node(&index);   
     Print_List(index);
+    Search(index,n) ? printf("Yes") : printf("No");
+    return 0;    
 }
 
 
